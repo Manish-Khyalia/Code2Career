@@ -1,0 +1,143 @@
+.applications-container {
+
+    padding: 20px;
+
+}
+
+.application-form {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+
+}
+
+.application-form input {
+
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 16px;
+
+}
+
+.application-form input:focus {
+
+    outline: none;
+    border-color: #3b82f6;
+
+}
+
+.add-btn {
+
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+.add-btn:hover {
+
+    background-color: #16a34a;
+
+}
+
+.cancel-btn {
+
+    background-color: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+.cancel-btn:hover {
+
+    background-color: #4b5563;
+
+}
+
+.applications-table {
+
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+}
+
+.applications-table th {
+
+    background-color: #1e293b;
+    color: white;
+    padding: 18px;
+    font-size: 16px;
+
+}
+
+.applications-table td {
+
+    padding: 18px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+
+}
+
+.applications-table tr:hover {
+
+    background-color: #f8fafc;
+
+}
+
+.edit-btn {
+
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+
+}
+
+.edit-btn:hover {
+
+    background-color: #2563eb;
+
+}
+
+.delete-btn {
+
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+
+}
+
+.delete-btn:hover {
+
+    background-color: #dc2626;
+
+}
+
+h1 {
+
+    margin-bottom: 25px;
+    font-size: 3rem;
+    font-weight: bold;
+
+}

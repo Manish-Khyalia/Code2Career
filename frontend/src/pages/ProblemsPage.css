@@ -1,0 +1,409 @@
+.problems-container {
+
+    padding: 20px;
+
+}
+
+.problem-form {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+
+}
+
+.problem-form input,
+.problem-form select {
+
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 16px;
+
+}
+
+.problem-form input:focus,
+.problem-form select:focus {
+
+    outline: none;
+    border-color: #3b82f6;
+
+}
+
+.revision-card {
+
+    background: #f8fafc;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.revision-card p {
+
+    margin-top: 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+.add-btn {
+
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+.add-btn:hover {
+
+    background-color: #16a34a;
+
+}
+
+h1 {
+
+    margin-bottom: 25px;
+    font-size: 3rem;
+    font-weight: bold;
+
+}
+
+.action-section {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.add-btn {
+
+    height: 40px;
+
+}
+
+.page-header {
+
+    margin-bottom: 30px;
+
+}
+
+.page-header h1 {
+
+    font-size: 40px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+
+}
+
+.page-header p {
+
+    font-size: 18px;
+    color: #64748b;
+    margin: 0;
+
+}
+.problems-table {
+
+    width: 100%;
+    border-collapse: collapse;
+
+    margin-top: 40px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+}
+.problems-table th {
+
+    background: #1e293b;
+
+    color: white;
+
+    padding: 18px;
+
+    font-size: 18px;
+
+    text-align: center;
+
+}
+.problems-table td {
+
+    padding: 18px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #e5e7eb;
+
+}
+.problems-table tbody tr:hover {
+
+    background: #f8fafc;
+
+}
+.edit-btn {
+
+    background: #3b82f6;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+.delete-btn {
+
+    background: #ef4444;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+.difficulty-badge {
+
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.difficulty-badge.easy {
+
+    background: #DCFCE7;
+
+    color: #15803D;
+
+}
+.difficulty-badge.medium {
+
+    background: #FEF3C7;
+
+    color: #B45309;
+
+}
+.difficulty-badge.hard {
+
+    background: #FEE2E2;
+
+    color: #B91C1C;
+
+}
+
+.revision-badge {
+
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.revision-badge.required {
+
+    background: #FEE2E2;
+
+    color: #DC2626;
+
+}
+
+.revision-badge.completed {
+
+    background: #DCFCE7;
+
+    color: #15803D;
+
+}
+
+.platform-badge {
+
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.platform-badge.leetcode {
+
+    background: #FFF7ED;
+
+    color: #EA580C;
+
+}
+
+.platform-badge.geeksforgeeks {
+
+    background: #DCFCE7;
+
+    color: #15803D;
+
+}
+
+.platform-badge.codeforces {
+
+    background: #DBEAFE;
+
+    color: #2563EB;
+
+}
+
+.platform-badge.codechef {
+
+    background: #F3E8FF;
+
+    color: #7E22CE;
+
+}
+
+.platform-badge.hackerrank {
+
+    background: #D1FAE5;
+
+    color: #047857;
+
+}
+
+.topic-badge {
+
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.topic-badge.arrays {
+
+    background: #DBEAFE;
+
+    color: #2563EB;
+
+}
+
+.topic-badge.strings {
+
+    background: #EDE9FE;
+
+    color: #7C3AED;
+
+}
+
+.topic-badge.graph {
+
+    background: #F3E8FF;
+
+    color: #9333EA;
+
+}
+
+.topic-badge.tree {
+
+    background: #DCFCE7;
+
+    color: #15803D;
+
+}
+
+.topic-badge.dp {
+
+    background: #FFF7ED;
+
+    color: #EA580C;
+
+}
+
+.topic-badge.binary-search {
+
+    background: #FCE7F3;
+
+    color: #BE185D;
+
+}
+
+.topic-badge.hashmap {
+
+    background: #ECFCCB;
+
+    color: #4D7C0F;
+
+}
+
+.topic-badge.sliding-window {
+
+    background: #E0F2FE;
+
+    color: #0369A1;
+
+}
+
+.topic-badge.greedy {
+
+    background: #FEF3C7;
+
+    color: #B45309;
+
+}
+
+.topic-badge.dynamic-programming {
+
+    background: #EDE9FE;
+
+    color: #6D28D9;
+
+}
+
