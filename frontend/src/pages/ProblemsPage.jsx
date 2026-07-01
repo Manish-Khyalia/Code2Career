@@ -18,6 +18,7 @@ function ProblemsPage() {
     const [topic, setTopic] = useState("");
     const [revisionStatus, setRevisionStatus] = useState(false);
     const [notes, setNotes] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const [editingId, setEditingId] = useState(null);
 
@@ -159,6 +160,7 @@ function ProblemsPage() {
                     difficulty, and manage revision efficiently.
                 </p>
 
+
             </div>
 
             <div className="problem-form">
@@ -266,6 +268,17 @@ function ProblemsPage() {
 
             </div>
 
+            <div className="search-section">
+
+                <input
+                    type="text"
+                    placeholder="🔍 Search Problem..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+
+            </div>
+
             <table className="problems-table">
 
                 <thead>
@@ -288,7 +301,13 @@ function ProblemsPage() {
 
                     {
 
-                        problems.map((problem) => (
+                        problems
+                        .filter(problem =>
+                            problem.problemName
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase())
+                        )
+                        .map((problem) => (
 
                             <tr key={problem.id}>
 

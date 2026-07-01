@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    /* Cleaned up the font family to match modern design systems */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0f172a;
+    color: #f1f5f9;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        135deg,
+        #0b0f19 0%,
+        #111e2e 50%,
+        #1e293b 100%
+    );
+}
+
+/* Glassmorphic Dark Login Card */
+.login-card {
+    width: 400px;
+    background: #111e2e; /* Dark theme card surface */
+    border: 1px solid #1e293b; /* Subtle structural border */
+    border-radius: 16px;
+    padding: 45px 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+/* App Title - Beautiful Mint Green matching your platform header */
+.login-card h1 {
+    color: #2ec4b6;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0 0 8px 0;
+    text-shadow: 0 0 20px rgba(46, 196, 182, 0.15);
+}
+
+/* Muted Slate Subtitle */
+.subtitle {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+    margin: 0 0 35px 0;
+}
+
+/* "Welcome Back" Header */
+.login-card h2 {
+    color: #f8fafc;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 25px 0;
+}
+
+/* Dark Mode Input Fields */
+.login-card input {
+    padding: 14px;
+    margin-bottom: 18px;
+    background-color: #152232; /* Slightly lighter container dark surface */
+    border: 1px solid #2A3E56;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #f1f5f9;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Input Fields Focus State */
+.login-card input:focus {
+    border-color: #2ec4b6; /* Border glows mint green on select */
+    box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.15);
+}
+
+/* Placeholders Visibility Fix */
+.login-card input::placeholder {
+    color: #64748B;
+}
+
+/* High-Contrast Login Button */
+.login-card button {
+    background: #3b82f6; /* Modern electric blue button */
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: all 0.2s ease;
+}
+
+.login-card button:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.login-card button:active {
+    transform: translateY(0);
+}
+
+/* Register Section Footer text */
+.register-text {
+    text-align: center;
+    margin-top: 25px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.register-text span {
+    color: #38bdf8; /* Vibrant sky blue action link */
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.2s ease;
+}
+
+.register-text span:hover {
+    color: #7dd3fc;
+    text-decoration: underline;
+}

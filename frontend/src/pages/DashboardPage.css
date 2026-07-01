@@ -65,3 +65,127 @@
     background-color: #8b5cf6;
     color: white;
 }
+
+.dashboard-header{
+
+    margin-bottom:35px;
+
+}
+
+.dashboard-header h1{
+
+    font-size:42px;
+
+    color:white;
+
+}
+
+.dashboard-header p{
+
+    color:#cbd5e1;
+
+    font-size:18px;
+
+}
+
+.dashboard-container{
+
+    background:#18181b;
+
+    min-height:100vh;
+
+}
+
+.card{
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.second-row{
+
+    margin-top:20px;
+
+}
+
+.quick-actions{
+
+    margin-top:45px;
+
+}
+
+.quick-actions h2{
+
+    color:white;
+
+    margin-bottom:20px;
+
+}
+
+.action-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.action-buttons button{
+
+    padding:14px 28px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.action-buttons button:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-3px);
+
+}
+
+.quote-card{
+
+    margin-top:40px;
+
+    background:#1e293b;
+
+    color:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    border-left:5px solid #3b82f6;
+
+}
+
+.quote-card h2{
+
+    margin-bottom:10px;
+
+}

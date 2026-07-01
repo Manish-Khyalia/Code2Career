@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/AuthService";
+import "./LoginPage.css";
 
 function LoginPage() {
 
@@ -33,37 +34,51 @@ function LoginPage() {
     };
 
     return (
-        <div>
 
-            <h1>Login Page</h1>
+        <div className="login-container">
 
-            <input
-                type="text"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) =>
-                    setEmail(e.target.value)
-                }
-            />
+            <div className="login-card">
 
-            <br /><br />
+                <h1>Code2Career</h1>
 
-            <input
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) =>
-                    setPassword(e.target.value)
-                }
-            />
+                <p className="subtitle">
+                    Track Your Placement Journey in One Place
+                </p>
 
-            <br /><br />
+                <h2>Welcome Back</h2>
 
-            <button onClick={handleLogin}>
-                Login
-            </button>
+                <input
+                    type="email"
+                    placeholder="Enter Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <input
+                    type="password"
+                    placeholder="Enter Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <button onClick={handleLogin}>
+                    Login
+                </button>
+
+                <p className="register-text">
+
+                    Don't have an account?
+
+                    <span onClick={() => navigate("/register")}>
+                        Register
+                    </span>
+
+                </p>
+
+            </div>
 
         </div>
+
     );
 }
 

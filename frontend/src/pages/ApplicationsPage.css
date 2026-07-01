@@ -1,36 +1,53 @@
 .applications-container {
-
     padding: 20px;
+}
 
+.applications-container h1,
+h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 25px;
+
+    color: #2ec4b6 !important;
+    text-shadow: 0 0 20px rgba(46, 196, 182, 0.1);
 }
 
 .application-form {
-
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin-bottom: 30px;
-
 }
 
 .application-form input {
-
     padding: 14px;
-    border: 1px solid #d1d5db;
+    background-color: #152232;
+    border: 1px solid #2A3E56;
     border-radius: 10px;
     font-size: 16px;
-
+    color: #f1f5f9;
+    outline: none;
+    transition: all 0.2s ease;
 }
 
 .application-form input:focus {
-
-    outline: none;
     border-color: #3b82f6;
-
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-.add-btn {
+.application-form input::placeholder {
+    color: #64748B !important;
+    opacity: 1;
+}
 
+.application-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.9) sepia(0.1) saturate(1) hue-rotate(180deg);
+    cursor: pointer;
+}
+
+
+.add-btn {
     background-color: #22c55e;
     color: white;
     border: none;
@@ -38,17 +55,14 @@
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
-
+    transition: background-color 0.2s ease;
 }
 
 .add-btn:hover {
-
     background-color: #16a34a;
-
 }
 
 .cancel-btn {
-
     background-color: #6b7280;
     color: white;
     border: none;
@@ -56,50 +70,50 @@
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
-
+    transition: background-color 0.2s ease;
 }
 
 .cancel-btn:hover {
-
     background-color: #4b5563;
-
 }
 
+
 .applications-table {
-
     width: 100%;
-    border-collapse: collapse;
     margin-top: 20px;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-
+    background: #111e2e;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .applications-table th {
-
     background-color: #1e293b;
-    color: white;
+    color: #f8fafc;
     padding: 18px;
     font-size: 16px;
-
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #2A3E56;
 }
 
 .applications-table td {
-
     padding: 18px;
+    color: #e2e8f0;
+    border-bottom: 1px solid #1e293b;
     text-align: center;
-    border-bottom: 1px solid #e5e7eb;
-
+    vertical-align: middle;
 }
 
-.applications-table tr:hover {
 
-    background-color: #f8fafc;
-
+.applications-table tr:hover td {
+    background-color: #1c2d42;
 }
+
 
 .edit-btn {
-
     background-color: #3b82f6;
     color: white;
     border: none;
@@ -107,17 +121,15 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: 15px;
-
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
 .edit-btn:hover {
-
     background-color: #2563eb;
-
 }
 
 .delete-btn {
-
     background-color: #ef4444;
     color: white;
     border: none;
@@ -125,19 +137,10 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: 15px;
-
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
 .delete-btn:hover {
-
     background-color: #dc2626;
-
-}
-
-h1 {
-
-    margin-bottom: 25px;
-    font-size: 3rem;
-    font-weight: bold;
-
 }

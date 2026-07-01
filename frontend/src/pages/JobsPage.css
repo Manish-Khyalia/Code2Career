@@ -1,150 +1,147 @@
 .jobs-container {
-
     padding: 30px;
-
 }
 
-.jobs-table {
+.jobs-container h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 25px;
 
-    width: 100%;
 
-    border-collapse: collapse;
-
-    margin-top: 20px;
-
-    background-color: white;
-
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
-
-}
-
-.jobs-table th {
-
-    background-color: #1e293b;
-    color: white;
-    padding: 15px;
-    text-align: center;
-
-}
-
-.jobs-table td {
-
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-
-}
-
-.jobs-table tr:hover {
-
-    background-color: #f1f5f9;
-
-}
-
-.jobs-table {
-
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: white;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
-
-    table-layout: fixed;
-}
-
-.edit-btn {
-
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-
-}
-
-.edit-btn:hover {
-
-    background-color: #2563eb;
-
-}
-
-.delete-btn {
-
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-
-}
-
-.delete-btn:hover {
-
-    background-color: #dc2626;
-
+    color: #2ec4b6 !important;
+    text-shadow: 0 0 20px rgba(46, 196, 182, 0.1);
 }
 
 .job-form {
-
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 15px;
-
     margin-bottom: 30px;
-
 }
 
 .job-form input {
+    padding: 14px;
+    background-color: #152232;
+    border: 1px solid #2A3E56;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #f1f5f9;
+    outline: none;
+    transition: all 0.2s ease;
+}
 
-    padding: 12px;
 
-    border: 1px solid #ccc;
+.job-form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
 
-    border-radius: 8px;
 
-    font-size: 15px;
+.job-form input::placeholder {
+    color: #64748B !important;
+    opacity: 1;
+}
 
+
+.job-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.9) sepia(0.1) saturate(1) hue-rotate(180deg);
+    cursor: pointer;
 }
 
 .add-btn {
-
     background-color: #22c55e;
-
     color: white;
-
     border: none;
-
-    border-radius: 8px;
-
+    border-radius: 10px;
     cursor: pointer;
-
     font-size: 16px;
-
+    font-weight: 600;
+    transition: background-color 0.2s ease;
 }
 
 .add-btn:hover {
-
     background-color: #16a34a;
-
 }
 
 .cancel-btn {
-
     background-color: #6b7280;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-
+    font-weight: 600;
+    transition: background-color 0.2s ease;
 }
 
 .cancel-btn:hover {
-
     background-color: #4b5563;
+}
 
+
+.jobs-table {
+    width: 100%;
+    margin-top: 40px;
+    background: #111e2e;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    table-layout: fixed;
+}
+
+.jobs-table th {
+    background-color: #1e293b;
+    color: #f8fafc;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #2A3E56;
+}
+
+.jobs-table td {
+    padding: 18px;
+    color: #e2e8f0;
+    border-bottom: 1px solid #1e293b;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.jobs-table tr:hover td {
+    background-color: #1c2d42;
+}
+
+
+.edit-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.edit-btn:hover {
+    background-color: #2563eb;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
 }
