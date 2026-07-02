@@ -37,6 +37,8 @@ function Navbar() {
 
                 <Link to="/resumes">Resumes</Link>
 
+                <Link to="/ai-interview">AI Interview</Link>
+
             </div>
 
             <button

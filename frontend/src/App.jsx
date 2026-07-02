@@ -7,6 +7,7 @@ import ApplicationsPage from "./pages/ApplicationsPage";
 import ProblemsPage from "./pages/ProblemsPage";
 import ResumesPage from "./pages/ResumesPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AIInterviewPage from "./pages/AIInterviewPage";
 
 function App() {
 
@@ -70,6 +71,8 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
+                <Route path="/ai-interview" element={<AIInterviewPage />} />
 
             </Routes>
 
