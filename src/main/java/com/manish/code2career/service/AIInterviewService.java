@@ -2,39 +2,96 @@ package com.manish.code2career.service;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AIInterviewService {
 
-    public List<String> generateQuestions(String company,
-                                          String role,
-                                          String experience) {
+    private final RestClient restClient;
 
-        return List.of(
+    @Value("${openrouter.api.key}")
+    private String apiKey;
 
-                "Tell me about yourself.",
+    public AIInterviewService(RestClient restClient) {
+        this.restClient = restClient;
+    }
 
-                "Why do you want to join " + company + "?",
+    public List<String> generateQuestions(
+            String company,
+            String role,
+            String experience
+    ) {
 
-                "Explain your latest " + role + " project.",
+        String prompt = """
+You are a Senior Technical Interviewer at %s.
 
-                "What are the four pillars of OOP?",
+Generate exactly 10 interview questions for a %s candidate with %s experience interviewing at %s.
 
-                "Difference between HashMap and TreeMap?",
+Requirements:
+- 5 Java/Backend/Role-specific technical questions.
+- 2 DSA questions commonly asked by %s.
+- 1 question about projects.
+- 2 HR/Behavioral questions.
+- Questions should be suitable for %s experience.
+- Avoid repeating similar questions.
+- Return only the questions.
+- One question per line.
+- Do not number them.
+- Do not use markdown."""
+                .formatted(
+                        company,
+                        role,
+                        experience,
+                        company,
+                        role,
+                        experience
+                );
 
-                "Explain JVM architecture.",
+        Map<String, Object> requestBody = Map.of(
 
-                "What is Spring Boot?",
+                "model", "google/gemma-4-26b-a4b-it:free",
 
-                "Difference between REST and RESTful API?",
-
-                "Explain SQL JOINs.",
-
-                "Why should we hire you for this " + role + " role?"
+                "messages",
+                List.of(
+                        Map.of(
+                                "role", "user",
+                                "content", prompt
+                        )
+                )
 
         );
 
+        Map response =
+                restClient.post()
+                        .uri("https://openrouter.ai/api/v1/chat/completions")
+                        .header("Authorization", "Bearer " + apiKey)
+                        .header("Content-Type", "application/json")
+                        .header("HTTP-Referer", "http://localhost:5173")
+                        .header("X-Title", "Code2Career")
+                        .body(requestBody)
+                        .retrieve()
+                        .body(Map.class);
+
+        Map choice =
+                (Map) ((List) response.get("choices")).get(0);
+
+        Map message =
+                (Map) choice.get("message");
+
+        String text =
+                (String) message.get("content");
+
+        return text.lines()
+                .map(String::trim)
+                .map(line -> line.replaceFirst("^\\d+\\.\\s*", ""))
+                .map(line -> line.replaceFirst("^-\\s*", ""))
+                .filter(line -> !line.isBlank())
+                .toList();
     }
 
 }

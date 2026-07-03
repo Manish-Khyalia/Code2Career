@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.client.RestClient;
 
 @Configuration
 @RequiredArgsConstructor
@@ -39,5 +40,10 @@ public class AppConfig {
             throws Exception {
 
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public RestClient restClient() {
+        return RestClient.create();
     }
 }
