@@ -117,3 +117,18 @@
     line-height: 1.6;
 
 }
+
+.generate-btn:disabled {
+
+    opacity: 0.7;
+    cursor: not-allowed;
+
+}
+
+.interview-info {
+
+    color: #bfc9d9;
+    margin-bottom: 20px;
+    font-size: 16px;
+
+}

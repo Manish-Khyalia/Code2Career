@@ -26,8 +26,9 @@ public class AIInterviewService {
             String role,
             String experience
     ) {
+        try {
 
-        String prompt = """
+            String prompt = """
 You are a Senior Technical Interviewer at %s.
 
 Generate exactly 10 interview questions for a %s candidate with %s experience interviewing at %s.
@@ -43,55 +44,71 @@ Requirements:
 - One question per line.
 - Do not number them.
 - Do not use markdown."""
-                .formatted(
-                        company,
-                        role,
-                        experience,
-                        company,
-                        role,
-                        experience
-                );
+                    .formatted(
+                            company,
+                            role,
+                            experience,
+                            company,
+                            role,
+                            experience
+                    );
 
-        Map<String, Object> requestBody = Map.of(
+            Map<String, Object> requestBody = Map.of(
 
-                "model", "google/gemma-4-26b-a4b-it:free",
+                    "model", "google/gemma-4-26b-a4b-it:free",
 
-                "messages",
-                List.of(
-                        Map.of(
-                                "role", "user",
-                                "content", prompt
-                        )
-                )
+                    "messages",
+                    List.of(
+                            Map.of(
+                                    "role", "user",
+                                    "content", prompt
+                            )
+                    )
 
-        );
+            );
 
-        Map response =
-                restClient.post()
-                        .uri("https://openrouter.ai/api/v1/chat/completions")
-                        .header("Authorization", "Bearer " + apiKey)
-                        .header("Content-Type", "application/json")
-                        .header("HTTP-Referer", "http://localhost:5173")
-                        .header("X-Title", "Code2Career")
-                        .body(requestBody)
-                        .retrieve()
-                        .body(Map.class);
+            Map response =
+                    restClient.post()
+                            .uri("https://openrouter.ai/api/v1/chat/completions")
+                            .header("Authorization", "Bearer " + apiKey)
+                            .header("Content-Type", "application/json")
+                            .header("HTTP-Referer", "http://localhost:5173")
+                            .header("X-Title", "Code2Career")
+                            .body(requestBody)
+                            .retrieve()
+                            .body(Map.class);
+//            System.out.println(response);
 
-        Map choice =
-                (Map) ((List) response.get("choices")).get(0);
+            Map choice =
+                    (Map) ((List) response.get("choices")).get(0);
 
-        Map message =
-                (Map) choice.get("message");
+            Map message =
+                    (Map) choice.get("message");
 
-        String text =
-                (String) message.get("content");
+            String text =
+                    (String) message.get("content");
 
-        return text.lines()
-                .map(String::trim)
-                .map(line -> line.replaceFirst("^\\d+\\.\\s*", ""))
-                .map(line -> line.replaceFirst("^-\\s*", ""))
-                .filter(line -> !line.isBlank())
-                .toList();
+            return text.lines()
+                    .map(String::trim)
+                    .map(line -> line.replaceFirst("^\\d+\\.\\s*", ""))
+                    .map(line -> line.replaceFirst("^-\\s*", ""))
+                    .filter(line -> !line.isBlank())
+                    .toList();
+
+        }
+        catch (Exception e) {
+
+//            e.printStackTrace();
+            System.out.println("AI API Error: " + e.getMessage());
+
+            return List.of(
+                    "The AI Interview service is temporarily unavailable.",
+                    "Please try again after a few moments."
+            );
+
+        }
+
+
     }
 
 }

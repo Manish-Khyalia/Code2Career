@@ -9,16 +9,17 @@ function AIInterviewPage() {
     const [role, setRole] = useState("");
     const [experience, setExperience] = useState("");
     const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const handleGenerate = async () => {
 
         if (!company || !role || !experience) {
 
             alert("Please select all fields.");
-
             return;
-
         }
+
+        setLoading(true);
 
         try {
 
@@ -30,12 +31,19 @@ function AIInterviewPage() {
 
             setQuestions(response);
 
-        }
-        catch (error) {
+            document
+                .querySelector(".ai-results")
+                ?.scrollIntoView({
+                    behavior: "smooth"
+                });
 
-            console.log(error);
+        } catch (error) {
 
             alert("Unable to generate interview questions.");
+
+        } finally {
+
+            setLoading(false);
 
         }
 
@@ -112,8 +120,9 @@ function AIInterviewPage() {
                 <button
                     className="generate-btn"
                     onClick={handleGenerate}
+                    disabled={loading}
                 >
-                    Generate Questions
+                    {loading ? "Generating..." : "Generate Questions"}
                 </button>
 
             </div>
@@ -126,7 +135,7 @@ function AIInterviewPage() {
 
                         <div className="questions-card">
 
-                            <h2>Interview Questions</h2>
+                            <h2> AI Generated Interview Questions</h2>
 
                             <ol>
 
