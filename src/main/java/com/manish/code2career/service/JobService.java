@@ -7,6 +7,10 @@ import com.manish.code2career.exception.JobNotFoundException;
 import com.manish.code2career.repository.JobRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.manish.code2career.entity.User;
+import com.manish.code2career.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -15,8 +19,18 @@ import java.util.List;
 public class JobService {
 
     private final JobRepository jobRepository;
+    private final UserRepository userRepository;
 
     public JobResponse addJob(JobRequest request) {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
         Job job = Job.builder()
                 .companyName(request.getCompanyName())
@@ -26,6 +40,7 @@ public class JobService {
                 .status(request.getStatus())
                 .applicationLink(request.getApplicationLink())
                 .deadline(request.getDeadline())
+                .user(user)
                 .build();
 
         Job savedJob = jobRepository.save(job);
@@ -44,7 +59,16 @@ public class JobService {
 
     public List<JobResponse> getAllJobs() {
 
-        return jobRepository.findAll()
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        return jobRepository.findByUser(user)
                 .stream()
                 .map(job -> JobResponse.builder()
                         .id(job.getId())
@@ -61,10 +85,18 @@ public class JobService {
 
     public JobResponse getJobById(Long id) {
 
-        Job job = jobRepository.findById(id)
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new JobNotFoundException(
-                                "Job not found"));
+                        new RuntimeException("User not found"));
+
+        Job job = jobRepository.findByIdAndUser(id, user)
+                .orElseThrow(() ->
+                        new JobNotFoundException("Job not found"));
 
         return JobResponse.builder()
                 .id(job.getId())
@@ -82,10 +114,18 @@ public class JobService {
             Long id,
             JobRequest request) {
 
-        Job job = jobRepository.findById(id)
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new JobNotFoundException(
-                                "Job not found"));
+                        new RuntimeException("User not found"));
+
+        Job job = jobRepository.findByIdAndUser(id, user)
+                .orElseThrow(() ->
+                        new JobNotFoundException("Job not found"));
 
         job.setCompanyName(request.getCompanyName());
         job.setJobRole(request.getJobRole());
@@ -111,10 +151,18 @@ public class JobService {
 
     public String deleteJob(Long id) {
 
-        Job job = jobRepository.findById(id)
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new JobNotFoundException(
-                                "Job not found"));
+                        new RuntimeException("User not found"));
+
+        Job job = jobRepository.findByIdAndUser(id, user)
+                .orElseThrow(() ->
+                        new JobNotFoundException("Job not found"));
 
         jobRepository.delete(job);
 

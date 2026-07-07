@@ -11,3 +11,13 @@ export const login = async (loginData) => {
 
     return response.data;
 };
+
+export const register = async (registerData) => {
+
+    const response = await axios.post(
+        `${BASE_URL}/auth/register`,
+        registerData
+    );
+
+    return response.data;
+};

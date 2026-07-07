@@ -29,4 +29,9 @@ public class Job {
     private String applicationLink;
 
     private String deadline;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }
