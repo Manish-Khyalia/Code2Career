@@ -1,10 +1,14 @@
 package com.manish.code2career.service;
 
 import com.manish.code2career.dto.DashboardResponse;
+import com.manish.code2career.entity.User;
 import com.manish.code2career.repository.ApplicationRepository;
 import com.manish.code2career.repository.JobRepository;
 import com.manish.code2career.repository.ProblemRepository;
+import com.manish.code2career.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,24 +21,35 @@ public class DashboardService {
 
     private final ProblemRepository problemRepository;
 
+    private final UserRepository userRepository;
+
     public DashboardResponse getDashboard() {
 
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
         return DashboardResponse.builder()
-                .totalJobs(jobRepository.count())
-                .totalApplications(applicationRepository.count())
-                .totalProblems(problemRepository.count())
-                .revisionProblems(problemRepository.countByRevisionStatus(true))
-                .easyProblems(problemRepository.countByDifficulty("Easy"))
-                .mediumProblems(problemRepository.countByDifficulty("Medium"))
-                .hardProblems(problemRepository.countByDifficulty("Hard"))
+                .totalJobs(jobRepository.countByUser(user))
+                .totalApplications(applicationRepository.countByUser(user))
+                .totalProblems(problemRepository.countByUser(user))
+                .revisionProblems(problemRepository.countByUserAndRevisionStatus(user, true))
+                .easyProblems(problemRepository.countByUserAndDifficulty(user, "Easy"))
+                .mediumProblems(problemRepository.countByUserAndDifficulty(user, "Medium"))
+                .hardProblems(problemRepository.countByUserAndDifficulty(user, "Hard"))
                 .appliedApplications(
-                        applicationRepository.countByStatus("Applied")
+                        applicationRepository.countByUserAndStatus(user, "Applied")
                 )
                 .oaClearedApplications(
-                        applicationRepository.countByStatus("OA Cleared")
+                        applicationRepository.countByUserAndStatus(user, "OA Cleared")
                 )
                 .interviewScheduledApplications(
-                        applicationRepository.countByStatus("Interview Scheduled")
+                        applicationRepository.countByUserAndStatus(user, "Interview Scheduled")
                 )
                 .build();
     }

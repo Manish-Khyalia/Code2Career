@@ -7,6 +7,10 @@ import com.manish.code2career.exception.ProblemNotFoundException;
 import com.manish.code2career.repository.ProblemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.manish.code2career.entity.User;
+import com.manish.code2career.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -15,9 +19,24 @@ import java.util.List;
 public class ProblemService {
 
     private final ProblemRepository problemRepository;
+    private final UserRepository userRepository;
+
+    private User getCurrentUser() {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+    }
 
     public ProblemResponse addProblem(
             ProblemRequest request) {
+
+        User user = getCurrentUser();
 
         Problem problem = Problem.builder()
                 .problemName(request.getProblemName())
@@ -26,6 +45,7 @@ public class ProblemService {
                 .topic(request.getTopic())
                 .revisionStatus(request.getRevisionStatus())
                 .notes(request.getNotes())
+                .user(user)
                 .build();
 
         Problem savedProblem =
@@ -44,7 +64,9 @@ public class ProblemService {
 
     public List<ProblemResponse> getAllProblems() {
 
-        return problemRepository.findAll()
+        User user = getCurrentUser();
+
+        return problemRepository.findByUser(user)
                 .stream()
                 .map(problem -> ProblemResponse.builder()
                         .id(problem.getId())
@@ -60,7 +82,10 @@ public class ProblemService {
 
     public ProblemResponse getProblemById(Long id) {
 
-        Problem problem = problemRepository.findById(id)
+        User user = getCurrentUser();
+
+        Problem problem = problemRepository
+                .findByIdAndUser(id, user)
                 .orElseThrow(() ->
                         new ProblemNotFoundException(
                                 "Problem not found"));
@@ -80,7 +105,10 @@ public class ProblemService {
             Long id,
             ProblemRequest request) {
 
-        Problem problem = problemRepository.findById(id)
+        User user = getCurrentUser();
+
+        Problem problem = problemRepository
+                .findByIdAndUser(id, user)
                 .orElseThrow(() ->
                         new ProblemNotFoundException(
                                 "Problem not found"));
@@ -108,7 +136,10 @@ public class ProblemService {
 
     public String deleteProblem(Long id) {
 
-        Problem problem = problemRepository.findById(id)
+        User user = getCurrentUser();
+
+        Problem problem = problemRepository
+                .findByIdAndUser(id, user)
                 .orElseThrow(() ->
                         new ProblemNotFoundException(
                                 "Problem not found"));
@@ -118,10 +149,11 @@ public class ProblemService {
         return "Problem deleted successfully";
     }
 
-    public List<ProblemResponse> getProblemsByTopic(
-            String topic) {
+    public List<ProblemResponse> getProblemsByTopic(String topic) {
 
-        return problemRepository.findByTopic(topic)
+        User user = getCurrentUser();
+
+        return problemRepository.findByUserAndTopic(user, topic)
                 .stream()
                 .map(problem -> ProblemResponse.builder()
                         .id(problem.getId())
@@ -138,7 +170,9 @@ public class ProblemService {
     public List<ProblemResponse> getProblemsByDifficulty(
             String difficulty) {
 
-        return problemRepository.findByDifficulty(difficulty)
+        User user = getCurrentUser();
+
+        return problemRepository.findByUserAndDifficulty(user, difficulty)
                 .stream()
                 .map(problem -> ProblemResponse.builder()
                         .id(problem.getId())
@@ -155,7 +189,9 @@ public class ProblemService {
     public List<ProblemResponse> getProblemsByRevisionStatus(
             Boolean revisionStatus) {
 
-        return problemRepository.findByRevisionStatus(revisionStatus)
+        User user = getCurrentUser();
+
+        return problemRepository.findByUserAndRevisionStatus(user, revisionStatus)
                 .stream()
                 .map(problem -> ProblemResponse.builder()
                         .id(problem.getId())

@@ -7,6 +7,10 @@ import com.manish.code2career.exception.ApplicationNotFoundException;
 import com.manish.code2career.repository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.manish.code2career.entity.User;
+import com.manish.code2career.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -15,9 +19,19 @@ import java.util.List;
 public class ApplicationService {
 
     private final ApplicationRepository applicationRepository;
+    private final UserRepository userRepository;
 
     public ApplicationResponse addApplication(
             ApplicationRequest request) {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
         Application application = Application.builder()
                 .companyName(request.getCompanyName())
@@ -25,6 +39,7 @@ public class ApplicationService {
                 .applicationDate(request.getApplicationDate())
                 .status(request.getStatus())
                 .notes(request.getNotes())
+                .user(user)
                 .build();
 
         Application savedApplication =
@@ -42,7 +57,16 @@ public class ApplicationService {
 
     public List<ApplicationResponse> getAllApplications() {
 
-        return applicationRepository.findAll()
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        return applicationRepository.findByUser(user)
                 .stream()
                 .map(application -> ApplicationResponse.builder()
                         .id(application.getId())
@@ -57,7 +81,17 @@ public class ApplicationService {
 
     public ApplicationResponse getApplicationById(Long id) {
 
-        Application application = applicationRepository.findById(id)
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        Application application = applicationRepository
+                .findByIdAndUser(id, user)
                 .orElseThrow(() ->
                         new ApplicationNotFoundException(
                                 "Application not found"));
@@ -76,7 +110,17 @@ public class ApplicationService {
             Long id,
             ApplicationRequest request) {
 
-        Application application = applicationRepository.findById(id)
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        Application application = applicationRepository
+                .findByIdAndUser(id, user)
                 .orElseThrow(() ->
                         new ApplicationNotFoundException(
                                 "Application not found"));
@@ -102,7 +146,17 @@ public class ApplicationService {
 
     public String deleteApplication(Long id) {
 
-        Application application = applicationRepository.findById(id)
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        Application application = applicationRepository
+                .findByIdAndUser(id, user)
                 .orElseThrow(() ->
                         new ApplicationNotFoundException(
                                 "Application not found"));
