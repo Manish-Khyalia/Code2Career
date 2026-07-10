@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface JobRepository extends JpaRepository<Job, Long> {
 
     List<Job> findByUser(User user);
+
     Optional<Job> findByIdAndUser(Long id, User user);
+
     long countByUser(User user);
 
 }
