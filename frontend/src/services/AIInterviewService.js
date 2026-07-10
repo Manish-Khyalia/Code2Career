@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "https://code2career-production.up.railway.app";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const generateQuestions = async (company, role, experience) => {
 
