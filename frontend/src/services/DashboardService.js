@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "https://code2career-production.up.railway.app";
 
 export const getDashboard = async () => {
 

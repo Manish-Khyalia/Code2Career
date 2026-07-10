@@ -108,7 +108,7 @@ function ResumesPage() {
            const token = localStorage.getItem("token");
 
            const response = await axios.get(
-               `http://localhost:8080/resumes/view/${id}`,
+               `https://code2career-production.up.railway.app/resumes/view/${id}`,
                {
                    responseType: "blob",
                    headers: {
