@@ -38,12 +38,14 @@ function RegisterPage() {
 
         } catch (error) {
 
-            alert(
-                error.response?.data?.message ||
-                "Registration Failed"
-            );
+              console.log(error);
 
-        } finally {
+              alert(
+                  JSON.stringify(error.response?.data) ||
+                  error.message
+              );
+
+          } finally {
 
             setLoading(false);
 
